@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_viewmodel.dart';
 
 import '../../../../utils/base_color.dart';
 import '../../../../widget/default_button.dart';
 import '../../../../widget/default_textfield.dart';
 
 class LoginContent extends StatelessWidget {
-  const LoginContent({super.key});
+  final LoginViewModel loginViewModel;
+
+  const LoginContent({super.key, required this.loginViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,10 @@ class LoginContent extends StatelessWidget {
             horizontal: 15,
             vertical: 10,
           ),
-          child: const DefaultTextField(
+          child: DefaultTextField(
+            onChanged: (value) {
+              loginViewModel.changeEmail(value);
+            },
             label: "Correo electronico",
             iconData: Icons.email_outlined,
           ),
@@ -83,7 +89,10 @@ class LoginContent extends StatelessWidget {
             horizontal: 15,
             vertical: 10,
           ),
-          child: const DefaultTextField(
+          child: DefaultTextField(
+            onChanged: (value) {
+              loginViewModel.changePassword(value);
+            },
             label: "Contraseña",
             iconData: Icons.lock_outlined,
           ),
@@ -97,7 +106,9 @@ class LoginContent extends StatelessWidget {
           ),
           child: DefaultButton(
             text: "Iniciar sesion",
-            onPressed: () {  },
+            onPressed: () {
+              loginViewModel.login();
+            },
           ),
         ),
         // Text button ---------------------------------------------------------

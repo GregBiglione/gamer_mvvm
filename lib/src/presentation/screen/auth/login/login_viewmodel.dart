@@ -24,6 +24,6 @@ class LoginViewModel extends ChangeNotifier {
   // ---------------------------------------------------------------------------
 
   void login() {
-    print("Email: ${_loginState.email} \nPassword: ${_loginState.password}");
+    print("Email: ${_loginState.email.value} \nPassword: ${_loginState.password.value}");
   }
 }
