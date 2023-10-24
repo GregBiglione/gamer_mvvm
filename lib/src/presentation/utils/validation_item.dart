@@ -1,8 +1,8 @@
 class ValidationItem {
-  String value;
-  String error;
+  final String value;
+  final String error;
 
-  ValidationItem({
+  const ValidationItem({
     this.value = "",
     this.error = "",
   });
