@@ -80,6 +80,7 @@ class LoginContent extends StatelessWidget {
               loginViewModel.changeEmail(value);
             },
             label: "Correo electronico",
+            error: loginViewModel.loginState.email.error,
             iconData: Icons.email_outlined,
           ),
         ),
@@ -94,6 +95,7 @@ class LoginContent extends StatelessWidget {
               loginViewModel.changePassword(value);
             },
             label: "Contraseña",
+            error: loginViewModel.loginState.password.error,
             iconData: Icons.lock_outlined,
           ),
         ),
@@ -112,16 +114,18 @@ class LoginContent extends StatelessWidget {
           ),
         ),
         // Text button ---------------------------------------------------------
-        Container(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.only(
-            bottom: 40,
-          ),
-          child: const Text(
-            "¿No tienes cuenta?",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.grey,
+        Expanded(
+          child: Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(
+              bottom: 40,
+            ),
+            child: const Text(
+              "¿No tienes cuenta?",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+              ),
             ),
           ),
         ),
