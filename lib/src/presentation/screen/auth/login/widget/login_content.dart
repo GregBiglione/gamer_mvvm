@@ -104,7 +104,7 @@ class LoginContent extends StatelessWidget {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(
             horizontal: 15,
-            vertical: 40,
+            vertical: 30,
           ),
           child: DefaultButton(
             text: "Iniciar sesion",
@@ -114,12 +114,15 @@ class LoginContent extends StatelessWidget {
           ),
         ),
         // Text button ---------------------------------------------------------
-        Expanded(
-          child: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(
-              bottom: 40,
-            ),
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(
+            bottom: 20,
+          ),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "register");
+            },
             child: const Text(
               "¿No tienes cuenta?",
               style: TextStyle(

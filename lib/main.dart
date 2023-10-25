@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         initialRoute: "login",
         routes: {
           "login": (BuildContext context) => const LoginScreen(),
+          "register": (BuildContext context) => const RegisterScreen(),
         },
       ),
     );
