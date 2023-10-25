@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/register/widget/register_content.dart';
 
+import '../../../utils/base_color.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
+      resizeToAvoidBottomInset: false,
       body: RegisterContent(),
     );
   }

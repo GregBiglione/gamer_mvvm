@@ -48,7 +48,7 @@ class LoginContent extends StatelessWidget {
             top: 15,
           ),
           child: const Text(
-            "Continua con",
+            "Continua con tu",
             style: TextStyle(
               fontSize: 24,
               color: Colors.white,
