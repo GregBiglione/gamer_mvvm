@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_state.dart';
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
 class LoginViewModel extends ChangeNotifier {
   LoginState _loginState = LoginState();
+  final FirebaseAuth _firebaseAuth;
+
+  LoginViewModel(this._firebaseAuth);
 
   // Getters -------------------------------------------------------------------
   LoginState get loginState => _loginState;
@@ -47,9 +51,14 @@ class LoginViewModel extends ChangeNotifier {
   // Login ---------------------------------------------------------------------
   // ---------------------------------------------------------------------------
 
-  void login() {
+  void login() async {
     if (loginState.isValid()) {
       print("Email: ${_loginState.email.value} \nPassword: ${_loginState.password.value}");
+      final data = await _firebaseAuth.signInWithEmailAndPassword(
+          email: _loginState.email.value,
+          password: _loginState.password.value,
+      );
+      print("Data: $data");
     }
     else {
       print("El formulario no es valido");

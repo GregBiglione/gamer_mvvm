@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_state.dart';
 
@@ -5,6 +6,7 @@ import '../../../utils/validation_item.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   RegisterState _registerState = RegisterState();
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   // Getters -------------------------------------------------------------------
   RegisterState get registerState => _registerState;
