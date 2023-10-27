@@ -18,7 +18,7 @@ class LoginViewModel extends ChangeNotifier {
       _loginState = _loginState.copyWith(email: const ValidationItem(
           error: "No es un email"));
     }
-    else if (value.length >= 6) {
+    else if(value.length >= 6) {
       _loginState = _loginState.copyWith(email: ValidationItem(
         value: value,
         error: "",

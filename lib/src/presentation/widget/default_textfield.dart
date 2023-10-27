@@ -5,9 +5,10 @@ class DefaultTextField extends StatelessWidget {
   final String error;
   final IconData iconData;
   final Function(String text) onChanged;
+  final bool obscureText;
 
   const DefaultTextField({super.key, required this.label, this.error = "",
-    required this.iconData, required this.onChanged});
+    required this.iconData, required this.onChanged, this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class DefaultTextField extends StatelessWidget {
       style: const TextStyle(
           color: Colors.white
       ),
+      obscureText: obscureText,
     );
   }
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_viewmodel.dart';
 
 import '../../../../utils/base_color.dart';
 import '../../../../widget/default_button.dart';
 import '../../../../widget/default_textfield.dart';
 
 class RegisterContent extends StatelessWidget {
-  const RegisterContent({super.key});
+  final RegisterViewModel registerViewModel;
+
+  const RegisterContent({super.key, required this.registerViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -95,10 +98,10 @@ class RegisterContent extends StatelessWidget {
             ),
             child: DefaultTextField(
               onChanged: (value) {
-                //loginViewModel.changeEmail(value);
+                registerViewModel.changeUsername(value);
               },
               label: "Nombre de usario",
-              //error: loginViewModel.loginState.email.error,
+              error: registerViewModel.registerState.username.error,
               iconData: Icons.person_outlined,
             ),
           ),
@@ -110,10 +113,10 @@ class RegisterContent extends StatelessWidget {
             ),
             child: DefaultTextField(
               onChanged: (value) {
-                //loginViewModel.changeEmail(value);
+                registerViewModel.changeEmail(value);
               },
               label: "Correo electronico",
-              //error: loginViewModel.loginState.email.error,
+              error: registerViewModel.registerState.email.error,
               iconData: Icons.email_outlined,
             ),
           ),
@@ -125,10 +128,11 @@ class RegisterContent extends StatelessWidget {
             ),
             child: DefaultTextField(
               onChanged: (value) {
-                //loginViewModel.changePassword(value);
+                registerViewModel.changePassword(value);
               },
+              obscureText: true,
               label: "Contraseña",
-              //error: loginViewModel.loginState.password.error,
+              error: registerViewModel.registerState.password.error,
               iconData: Icons.lock_outlined,
             ),
           ),
@@ -140,10 +144,11 @@ class RegisterContent extends StatelessWidget {
             ),
             child: DefaultTextField(
               onChanged: (value) {
-                //loginViewModel.changePassword(value);
+                registerViewModel.changeConfirmPassword(value);
               },
+              obscureText: true,
               label: "Confirmar contraseña",
-              //error: loginViewModel.loginState.password.error,
+              error: registerViewModel.registerState.password.error,
               iconData: Icons.lock_outlined,
             ),
           ),
@@ -157,7 +162,7 @@ class RegisterContent extends StatelessWidget {
             child: DefaultButton(
               text: "Registarse",
               onPressed: () {
-                //loginViewModel.login();
+                registerViewModel.register();
               },
             ),
           ),

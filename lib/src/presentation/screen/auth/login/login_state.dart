@@ -9,7 +9,7 @@ class LoginState {
     this.password = const ValidationItem(),
   });
 
-  LoginState copyWith ({ValidationItem? email, ValidationItem? password}) => LoginState(
+  LoginState copyWith({ValidationItem? email, ValidationItem? password}) => LoginState(
     email: email ?? this.email,
     password: password ?? this.password,
   );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/register/widget/register_content.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/base_color.dart';
 
@@ -8,10 +10,12 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RegisterViewModel viewModel = Provider.of<RegisterViewModel>(context);
+    
     return Scaffold(
       backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: false,
-      body: RegisterContent(),
+      body: RegisterContent(registerViewModel: viewModel,),
     );
   }
 }

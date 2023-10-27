@@ -94,6 +94,7 @@ class LoginContent extends StatelessWidget {
             onChanged: (value) {
               loginViewModel.changePassword(value);
             },
+            obscureText: true,
             label: "Contraseña",
             error: loginViewModel.loginState.password.error,
             iconData: Icons.lock_outlined,
