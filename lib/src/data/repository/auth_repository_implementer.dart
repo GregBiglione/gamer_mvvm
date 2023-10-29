@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImplementer implements AuthRepository {
-  FirebaseAuth _firebaseAuth;
+  final FirebaseAuth _firebaseAuth;
 
   AuthRepositoryImplementer(this._firebaseAuth);
 
