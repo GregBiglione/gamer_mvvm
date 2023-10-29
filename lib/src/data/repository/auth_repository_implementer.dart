@@ -3,7 +3,6 @@ import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: AuthRepository)
 class AuthRepositoryImplementer implements AuthRepository {
   final FirebaseAuth _firebaseAuth;
 

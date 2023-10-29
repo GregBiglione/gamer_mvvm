@@ -1,7 +1,5 @@
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
-import 'package:injectable/injectable.dart';
 
-@Injectable()
 class LoginUseCase {
   final AuthRepository _authRepository;
 

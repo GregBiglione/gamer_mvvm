@@ -1,13 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gamer_mvvm/src/domain/utils/resource.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_state.dart';
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
-class LoginViewModel extends ChangeNotifier {
-  LoginState _loginState = LoginState();
-  final FirebaseAuth _firebaseAuth;
+import '../../../../domain/use_case/auth/auth_usecase.dart';
 
-  LoginViewModel(this._firebaseAuth);
+class LoginViewModel extends ChangeNotifier {
+  // State ---------------------------------------------------------------------
+  LoginState _loginState = LoginState();
+  late Resource _response = Init();
+  // Use case ------------------------------------------------------------------
+  final AuthUseCase _authUseCase;
+
+  LoginViewModel(this._authUseCase);
 
   // Getters -------------------------------------------------------------------
   LoginState get loginState => _loginState;
@@ -53,12 +59,14 @@ class LoginViewModel extends ChangeNotifier {
 
   void login() async {
     if (loginState.isValid()) {
-      print("Email: ${_loginState.email.value} \nPassword: ${_loginState.password.value}");
-      final data = await _firebaseAuth.signInWithEmailAndPassword(
-          email: _loginState.email.value,
-          password: _loginState.password.value,
+      // Loading ---------------------------------------------------------------
+      _response = Loading();
+      // Login -----------------------------------------------------------------
+      _response = _authUseCase.loginUseCase.launch(
+        email: _loginState.email.value,
+        password: _loginState.password.value,
       );
-      print("Data: $data");
+      print("Data: $_response");
     }
     else {
       print("El formulario no es valido");
