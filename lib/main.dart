@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginViewModel(locator<AuthUseCase>())),
-        ChangeNotifierProvider(create: (context) => RegisterViewModel()),
+        ChangeNotifierProvider(create: (context) => RegisterViewModel(locator<AuthUseCase>())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

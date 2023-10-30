@@ -1,3 +1,4 @@
+import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
 class RegisterState {
@@ -20,6 +21,12 @@ class RegisterState {
         email: email ?? this.email,
         password: password ?? this.password,
         confirmPassword: confirmPassword ?? this.confirmPassword,
+  );
+
+  toUser() => UserData(
+    username: username.value,
+    email: email.value,
+    password: password.value,
   );
 
   bool isValid() {

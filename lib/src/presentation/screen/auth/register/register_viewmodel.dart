@@ -2,14 +2,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_state.dart';
 
+import '../../../../domain/use_case/auth/auth_usecase.dart';
+import '../../../../domain/utils/resource.dart';
 import '../../../utils/validation_item.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   RegisterState _registerState = RegisterState();
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  late Resource _response = Init();
+  // Use case ------------------------------------------------------------------
+  final AuthUseCase _authUseCase;
+
+  RegisterViewModel(this._authUseCase);
 
   // Getters -------------------------------------------------------------------
   RegisterState get registerState => _registerState;
+  Resource get response => _response;
 
   // Setters -------------------------------------------------------------------
   void changeUsername(String value) {
@@ -76,12 +83,23 @@ class RegisterViewModel extends ChangeNotifier {
   // Register ------------------------------------------------------------------
   // ---------------------------------------------------------------------------
 
-  void register() {
+  void register() async {
     if (registerState.isValid()) {
-      print("Username: ${registerState.username.value}\nEmail: ${registerState.email.value}\nPassword: ${registerState.password.value}\nConfirm password: ${registerState.confirmPassword.value} \n");
+      // Loading ---------------------------------------------------------------
+      _response = Loading();
+      notifyListeners();
+      // Register --------------------------------------------------------------
+      _response = await _authUseCase.registerUseCase.launch(_registerState.toUser());
+      notifyListeners();
     }
-    else {
-      print("El formulario no es valido");
-    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Reset ---------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  resetResponse() {
+    _response = Init();
+    notifyListeners();
   }
 }
