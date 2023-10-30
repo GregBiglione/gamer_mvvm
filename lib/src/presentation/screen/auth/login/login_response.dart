@@ -10,29 +10,23 @@ class LoginResponse {
 
   LoginResponse(this.loginViewModel, this.context) {
     if (loginViewModel.response is Loading){
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        buildShowDialog(context);
-      });
+      buildShowDialog(context);
     }
     else if (loginViewModel.response is Error){
       final data = loginViewModel.response as Error;
 
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        Navigator.pop(context, true);
-        Fluttertoast.showToast(
-          msg: "Error: ${data.error.toString()}",
-          toastLength: Toast.LENGTH_LONG,
-          timeInSecForIosWeb: 3,
-        );
-        loginViewModel.resetResponse();
-      });
+      Navigator.pop(context, true);
+      Fluttertoast.showToast(
+        msg: "Error: ${data.error.toString()}",
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 3,
+      );
+      loginViewModel.resetResponse();
     }
     else if (loginViewModel.response is Success) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        Navigator.pushNamedAndRemoveUntil(
-          context, "home", (route) => false,
-        );
-      });
+      Navigator.pushNamedAndRemoveUntil(
+        context, "home", (route) => false,
+      );
     }
   }
 }

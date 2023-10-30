@@ -11,7 +11,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginViewModel viewModel = Provider.of<LoginViewModel>(context);
-    LoginResponse(viewModel, context);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      LoginResponse(viewModel, context);
+    });
 
     return Scaffold(
       backgroundColor: backgroundColor,
