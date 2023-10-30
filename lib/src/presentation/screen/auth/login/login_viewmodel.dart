@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_state.dart';
@@ -17,6 +16,7 @@ class LoginViewModel extends ChangeNotifier {
 
   // Getters -------------------------------------------------------------------
   LoginState get loginState => _loginState;
+  Resource get response => _response;
 
   // Setters -------------------------------------------------------------------
   void changeEmail(String value) {
@@ -61,15 +61,26 @@ class LoginViewModel extends ChangeNotifier {
     if (loginState.isValid()) {
       // Loading ---------------------------------------------------------------
       _response = Loading();
+      notifyListeners();
       // Login -----------------------------------------------------------------
-      _response = _authUseCase.loginUseCase.launch(
+      _response = await _authUseCase.loginUseCase.launch(
         email: _loginState.email.value,
         password: _loginState.password.value,
       );
       print("Data: $_response");
+      notifyListeners();
     }
     else {
       print("El formulario no es valido");
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Reset ---------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  resetResponse() {
+    _response = Init();
+    notifyListeners();
   }
 }

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
 import 'package:gamer_mvvm/src/injection.dart';
+import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "login": (BuildContext context) => const LoginScreen(),
           "register": (BuildContext context) => const RegisterScreen(),
+          "home": (BuildContext context) => const HomeScreen(),
         },
       ),
     );

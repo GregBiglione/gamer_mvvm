@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
-import 'package:injectable/injectable.dart';
 
 class AuthRepositoryImplementer implements AuthRepository {
   final FirebaseAuth _firebaseAuth;
@@ -11,7 +10,7 @@ class AuthRepositoryImplementer implements AuthRepository {
   @override
   Future<Resource> login({required String email, required String password}) async {
     try {
-      final data = _firebaseAuth.signInWithEmailAndPassword(
+      UserCredential data = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );

@@ -33,6 +33,7 @@ class DefaultTextField extends StatelessWidget {
           color: Colors.white
       ),
       obscureText: obscureText,
+      textInputAction: TextInputAction.next,
     );
   }
 }
