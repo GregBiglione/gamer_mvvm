@@ -24,6 +24,7 @@ class LoginResponse {
       loginViewModel.resetResponse();
     }
     else if (loginViewModel.response is Success) {
+      loginViewModel.resetResponse();
       Navigator.pushNamedAndRemoveUntil(
         context, "home", (route) => false,
       );

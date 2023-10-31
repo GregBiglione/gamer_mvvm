@@ -3,6 +3,7 @@ import 'package:gamer_mvvm/src/data/repository/auth_repository_implementer.dart'
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/login_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/auth/logout_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/register_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/user_session_usecase.dart';
 import 'package:injectable/injectable.dart';
@@ -33,6 +34,7 @@ abstract class AppModule {
   AuthUseCase get loginUseCase => AuthUseCase(
     loginUseCase: LoginUseCase(authRepository), 
     registerUseCase: RegisterUseCase(authRepository),
-    userSessionUseCase: UserSessionUseCase(authRepository)
+    userSessionUseCase: UserSessionUseCase(authRepository),
+    logoutUseCase: LogoutUseCase(authRepository),
   );
 }
