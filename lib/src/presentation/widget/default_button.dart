@@ -5,15 +5,18 @@ import '../utils/base_color.dart';
 class DefaultButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
+  final IconData iconData;
+  final Color color;
 
-  const DefaultButton({super.key, required this.text, required this.onPressed});
+  const DefaultButton({super.key, required this.text, required this.onPressed,
+    this.iconData = Icons.arrow_forward_ios, this.color = baseColor});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: baseColor,
+        backgroundColor: color,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)
         ),
@@ -34,11 +37,11 @@ class DefaultButton extends StatelessWidget {
           Container(
             alignment: Alignment.centerRight,
             height: 50,
-            child: const CircleAvatar(
+            child: CircleAvatar(
               backgroundColor: Colors.black,
               radius: 15,
               child: Icon(
-                Icons.arrow_forward_ios,
+                iconData,
                 color: Colors.white,
               ),
             ),
