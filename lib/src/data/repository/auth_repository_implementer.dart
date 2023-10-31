@@ -33,7 +33,6 @@ class AuthRepositoryImplementer implements AuthRepository {
       );
 
       userData.id = data.user?.uid ?? "";
-      userData.password = "";
       await _usersReference.doc(userData.id).set(userData.toJson());
 
       return Success(data);
@@ -41,4 +40,7 @@ class AuthRepositoryImplementer implements AuthRepository {
       return Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  User? get user => _firebaseAuth.currentUser;
 }

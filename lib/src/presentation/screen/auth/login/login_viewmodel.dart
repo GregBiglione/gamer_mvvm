@@ -12,7 +12,13 @@ class LoginViewModel extends ChangeNotifier {
   // Use case ------------------------------------------------------------------
   final AuthUseCase _authUseCase;
 
-  LoginViewModel(this._authUseCase);
+  LoginViewModel(this._authUseCase) {
+    final user = _authUseCase.userSessionUseCase.userSession;
+
+    if (user != null) {
+      _response = Success(user);
+    }
+  }
 
   // Getters -------------------------------------------------------------------
   LoginState get loginState => _loginState;
