@@ -14,22 +14,9 @@ class ProfileViewModel extends ChangeNotifier {
     getUserById();
   }
 
-  getUserById() {
+  Stream<Resource<UserData>> getUserById() {
     final id = _authUseCase.userSessionUseCase.userSession?.uid ?? "";
 
-    _userUseCase.getUserByIdUseCase.launch(id).listen((Resource<UserData> response) {
-      if(response is Loading) {
-
-      }
-      else if(response is Error) {
-        final data = response as Error;
-        print("Error: ${data.error}");
-
-      }
-      else if(response is Success) {
-        final data = response as Success<UserData>;
-        print("Success: ${data.data.toJson()}");
-      }
-    });
+    return _userUseCase.getUserByIdUseCase.launch(id);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/utils/base_color.dart';
 
 class HomeBottomBar extends StatelessWidget {
   final HomeViewModel homeViewModel;
@@ -10,6 +11,9 @@ class HomeBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: backgroundColor,
+      fixedColor: Colors.white,
+      unselectedItemColor: Colors.grey[400],
       currentIndex: homeViewModel.currentIndex,
       onTap: (index) {
         homeViewModel.currentIndex = index;
@@ -17,19 +21,22 @@ class HomeBottomBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(
-              Icons.list,
+            Icons.list,
+            color: Colors.white,
           ),
           label: "Posts"
         ),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.list_alt,
+              color: Colors.white,
             ),
             label: "My Posts"
         ),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
+              color: Colors.white,
             ),
             label: "Profile"
         ),

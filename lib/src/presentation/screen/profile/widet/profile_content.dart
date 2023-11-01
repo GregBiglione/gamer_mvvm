@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/src/domain/model/user_data.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_button.dart';
 
 class ProfileContent extends StatelessWidget {
-  const ProfileContent({super.key});
+  final UserData userData;
+
+  const ProfileContent({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +62,9 @@ class ProfileContent extends StatelessWidget {
             margin: const EdgeInsets.only(
               top: 40,
             ),
-            child: const Text(
-              "Noùbre de usario",
-              style: TextStyle(
+            child: Text(
+              userData.username,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
               ),
@@ -71,9 +75,9 @@ class ProfileContent extends StatelessWidget {
             margin: const EdgeInsets.only(
               top: 5,
             ),
-            child: const Text(
-              "test@gmail.com",
-              style: TextStyle(
+            child: Text(
+              userData.email,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 17,
               ),
