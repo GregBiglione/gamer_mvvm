@@ -23,4 +23,19 @@ class UserRepositoryImplementer implements UserRepository {
       throw Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Future<Resource<bool>> updateWithoutImage(UserData userData) async {
+    try {
+      Map<String, dynamic> map = {
+        "image": userData.image,
+        "username": userData.username,
+      };
+      final data = await _userReference.doc(userData.id).update(map);
+
+      return Success(true);
+    } on FirebaseException catch (e) {
+      return Error(e.message ?? "Error desconocido");
+    }
+  }
 }
