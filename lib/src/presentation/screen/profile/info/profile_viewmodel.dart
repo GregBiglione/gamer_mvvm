@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart';
 
-import '../../../domain/model/user_data.dart';
-import '../../../domain/use_case/auth/auth_usecase.dart';
-import '../../../domain/utils/resource.dart';
+import '../../../../domain/model/user_data.dart';
+import '../../../../domain/use_case/auth/auth_usecase.dart';
+import '../../../../domain/utils/resource.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   // Use case ------------------------------------------------------------------
@@ -18,5 +18,13 @@ class ProfileViewModel extends ChangeNotifier {
     final id = _authUseCase.userSessionUseCase.userSession?.uid ?? "";
 
     return _userUseCase.getUserByIdUseCase.launch(id);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Logout --------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  logout() async {
+    await _authUseCase.logoutUseCase.launch();
   }
 }

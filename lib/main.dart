@@ -5,7 +5,8 @@ import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart';
 import 'package:gamer_mvvm/src/injection.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
-import 'package:gamer_mvvm/src/presentation/screen/profile/profile_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           "login": (BuildContext context) => const LoginScreen(),
           "register": (BuildContext context) => const RegisterScreen(),
           "home": (BuildContext context) => const HomeScreen(),
+          "profile/update": (BuildContext context) => const UpdateProfileScreen(),
         },
       ),
     );

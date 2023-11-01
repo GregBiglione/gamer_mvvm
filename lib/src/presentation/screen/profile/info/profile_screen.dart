@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
-import 'package:gamer_mvvm/src/presentation/screen/profile/profile_viewmodel.dart';
-import 'package:gamer_mvvm/src/presentation/screen/profile/widet/profile_content.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/info/widet/profile_content.dart';
 import 'package:gamer_mvvm/src/presentation/utils/base_color.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +34,10 @@ class ProfileScreen extends StatelessWidget {
               child: Text("Error ${data.error}"),
             );
           }
-          return ProfileContent(userData: userData.data);
+          return ProfileContent(
+            userData: userData.data,
+            profileViewModel: viewModel,
+          );
         },
       ),
     );

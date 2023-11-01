@@ -17,12 +17,4 @@ class HomeViewModel extends ChangeNotifier {
     _currentIndex = index;
     notifyListeners();
   }
-
-  // ---------------------------------------------------------------------------
-  // Logout --------------------------------------------------------------------
-  // ---------------------------------------------------------------------------
-
-  logout() async {
-    await _authUseCase.logoutUseCase.launch();
-  }
 }

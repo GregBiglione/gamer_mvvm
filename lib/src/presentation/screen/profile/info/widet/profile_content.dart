@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
-import 'package:gamer_mvvm/src/presentation/screen/profile/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_button.dart';
+import '../profile_viewmodel.dart';
 
 class ProfileContent extends StatelessWidget {
   final UserData userData;
+  final ProfileViewModel profileViewModel;
 
-  const ProfileContent({super.key, required this.userData});
+  const ProfileContent({super.key, required this.userData,
+    required this.profileViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,9 @@ class ProfileContent extends StatelessWidget {
             ),
             child: DefaultButton(
               text: "Editar datos",
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pushNamed(context, "profile/update");
+              },
               iconData: Icons.edit,
               color: Colors.white,
             ),
@@ -106,7 +110,10 @@ class ProfileContent extends StatelessWidget {
             ),
             child: DefaultButton(
               text: "Cerrar sesion",
-              onPressed: (){},
+              onPressed: () async {
+                await profileViewModel.logout();
+                Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);
+              },
               iconData: Icons.power_settings_new,
               color: Colors.red,
             ),
