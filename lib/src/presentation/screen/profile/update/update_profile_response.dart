@@ -25,12 +25,12 @@ class UpdateProfileResponse {
       updateProfileViewModel.resetResponse();
     }
     else if (updateProfileViewModel.response is Success) {
-      updateProfileViewModel.resetResponse();
+      //updateProfileViewModel.resetResponse();
       final success = updateProfileViewModel.response as Success<String>;
 
       Navigator.pop(context, true);
       Fluttertoast.showToast(
-        msg: "Error: ${success.data}",
+        msg: success.data,
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 3,
       );

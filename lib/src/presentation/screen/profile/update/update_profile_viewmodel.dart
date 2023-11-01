@@ -50,7 +50,7 @@ class UpdateProfileViewModel extends ChangeNotifier {
     _response = Loading();
     notifyListeners();
     // Update ------------------------------------------------------------------
-    _response = _userUseCase.updateUserUseCaseWithoutImage
+    _response = await _userUseCase.updateUserUseCaseWithoutImage
         .launch(_updateProfileState.toUser());
     notifyListeners();
   }
