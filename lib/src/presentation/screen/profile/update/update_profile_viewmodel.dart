@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_state.dart';
 import '../../../../domain/use_case/user/user_usecase.dart';
+import '../../../../domain/utils/resource.dart';
 import '../../../utils/validation_item.dart';
 
 class UpdateProfileViewModel extends ChangeNotifier {
   // State ---------------------------------------------------------------------
   UpdateProfileState _updateProfileState = UpdateProfileState();
+  late Resource _response = Init();
   // Use case ------------------------------------------------------------------
   final UserUseCase _userUseCase;
 
@@ -14,6 +16,7 @@ class UpdateProfileViewModel extends ChangeNotifier {
 
   // Getters -------------------------------------------------------------------
   UpdateProfileState get updateProfileState => _updateProfileState;
+  Resource get response => _response;
 
   // Setters -------------------------------------------------------------------
   loadData(UserData userData) {
@@ -23,7 +26,6 @@ class UpdateProfileViewModel extends ChangeNotifier {
       image: ValidationItem(value: userData.image),
       username: ValidationItem(value: userData.username),
     );
-    //notifyListeners();
   }
 
   void changeUsername(String value) {
@@ -36,6 +38,20 @@ class UpdateProfileViewModel extends ChangeNotifier {
       _updateProfileState = _updateProfileState.copyWith(username: const ValidationItem(
           error: "Al menos 3 caracteres"));
     }
+    notifyListeners();
+  }
+
+  //----------------------------------------------------------------------------
+  // Update
+  //----------------------------------------------------------------------------
+
+  updateWithoutImage() async {
+    // Loading -----------------------------------------------------------------
+    _response = Loading();
+    notifyListeners();
+    // Update ------------------------------------------------------------------
+    _response = _userUseCase.updateUserUseCaseWithoutImage
+        .launch(_updateProfileState.toUser());
     notifyListeners();
   }
 }

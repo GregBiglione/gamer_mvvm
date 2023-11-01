@@ -1,5 +1,7 @@
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
+import '../../../../domain/model/user_data.dart';
+
 class UpdateProfileState {
   ValidationItem id;
   ValidationItem image;
@@ -16,6 +18,12 @@ class UpdateProfileState {
     id: id = id ?? this.id,
     image: image = image ?? this.image,
     username: username = username ?? this.username,
+  );
+
+  toUser() => UserData(
+    id: id.value,
+    image: image.value,
+    username: username.value,
   );
 
   bool isValid() {
