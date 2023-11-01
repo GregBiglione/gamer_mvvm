@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/src/domain/model/user_data.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_textfield.dart';
-
 import '../../../../widget/default_button.dart';
 
-class UpdateProfileContent extends StatelessWidget {
-  const UpdateProfileContent({super.key});
+class UpdateProfileContent extends StatefulWidget {
+  final UpdateProfileViewModel updateProfileViewModel;
+  final UserData userData;
+
+  const UpdateProfileContent({super.key, required this.updateProfileViewModel,
+    required this.userData});
+
+  @override
+  State<UpdateProfileContent> createState() => _UpdateProfileContentState();
+}
+
+class _UpdateProfileContentState extends State<UpdateProfileContent> {
+
+  @override
+  void initState() {
+    widget.updateProfileViewModel.loadData(widget.userData);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +98,13 @@ class UpdateProfileContent extends StatelessWidget {
               right: 60,
             ),
             child: DefaultTextField(
+              initialValue: widget.updateProfileViewModel.updateProfileState.username.value,
+              error: widget.updateProfileViewModel.updateProfileState.username.error,
               label: "Nombre de usuario",
               iconData: Icons.person_2_outlined,
-              onChanged: (value) {},
+              onChanged: (value) {
+                widget.updateProfileViewModel.changeUsername(value);
+              },
             ),
           ),
           // Edit information button -------------------------------------------

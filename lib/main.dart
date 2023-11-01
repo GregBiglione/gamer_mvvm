@@ -7,6 +7,7 @@ import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_viewmodel.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
           locator<UserUseCase>(),
           locator<AuthUseCase>(),),
         ),
+        ChangeNotifierProvider(create: (context) => UpdateProfileViewModel(locator<UserUseCase>())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
