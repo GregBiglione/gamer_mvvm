@@ -3,5 +3,5 @@ import '../utils/resource.dart';
 
 abstract class UserRepository {
   Stream<Resource<UserData>> getUserById(String id);
-  Future<Resource<bool>> updateWithoutImage(UserData userData);
+  Future<Resource<String>> updateWithoutImage(UserData userData);
 }

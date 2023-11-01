@@ -54,4 +54,13 @@ class UpdateProfileViewModel extends ChangeNotifier {
         .launch(_updateProfileState.toUser());
     notifyListeners();
   }
+
+  // ---------------------------------------------------------------------------
+  // Reset ---------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  resetResponse() {
+    _response = Init();
+    notifyListeners();
+  }
 }

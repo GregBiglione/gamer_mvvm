@@ -25,7 +25,7 @@ class UserRepositoryImplementer implements UserRepository {
   }
 
   @override
-  Future<Resource<bool>> updateWithoutImage(UserData userData) async {
+  Future<Resource<String>> updateWithoutImage(UserData userData) async {
     try {
       Map<String, dynamic> map = {
         "image": userData.image,
@@ -33,7 +33,7 @@ class UserRepositoryImplementer implements UserRepository {
       };
       final data = await _userReference.doc(userData.id).update(map);
 
-      return Success(true);
+      return Success("El usario se ha actualizado correctamente");
     } on FirebaseException catch (e) {
       return Error(e.message ?? "Error desconocido");
     }
