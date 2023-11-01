@@ -96,7 +96,11 @@ class ProfileContent extends StatelessWidget {
             child: DefaultButton(
               text: "Editar datos",
               onPressed: (){
-                Navigator.pushNamed(context, "profile/update");
+                Navigator.pushNamed(
+                  context,
+                  "profile/update",
+                  arguments: userData,
+                );
               },
               iconData: Icons.edit,
               color: Colors.white,
