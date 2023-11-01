@@ -17,7 +17,6 @@ class UserData {
     id: json["id"],
     username: json["username"],
     email: json["email"],
-    password: json["password"],
   );
 
   Map<String, dynamic> toJson() => {

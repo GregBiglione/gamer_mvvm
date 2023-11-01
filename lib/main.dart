@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart';
 import 'package:gamer_mvvm/src/injection.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/profile/profile_viewmodel.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
@@ -29,6 +31,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LoginViewModel(locator<AuthUseCase>())),
         ChangeNotifierProvider(create: (context) => RegisterViewModel(locator<AuthUseCase>())),
         ChangeNotifierProvider(create: (context) => HomeViewModel(locator<AuthUseCase>(), 0)),
+        ChangeNotifierProvider(create: (context) => ProfileViewModel(
+          locator<UserUseCase>(),
+          locator<AuthUseCase>(),),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
