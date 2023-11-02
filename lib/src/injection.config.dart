@@ -10,12 +10,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:cloud_firestore/cloud_firestore.dart' as _i5;
 import 'package:firebase_auth/firebase_auth.dart' as _i6;
-import 'package:gamer_mvvm/src/di/app_module.dart' as _i10;
+import 'package:firebase_storage/firebase_storage.dart' as _i8;
+import 'package:gamer_mvvm/src/di/app_module.dart' as _i11;
 import 'package:gamer_mvvm/src/di/firebase_service.dart' as _i7;
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart' as _i3;
-import 'package:gamer_mvvm/src/domain/repository/user_repository.dart' as _i8;
+import 'package:gamer_mvvm/src/domain/repository/user_repository.dart' as _i9;
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart' as _i4;
-import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart' as _i9;
+import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart' as _i10;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
@@ -41,10 +42,12 @@ extension GetItInjectableX on _i1.GetIt {
       () => appModule.firebaseService,
       preResolve: true,
     );
-    gh.factory<_i8.UserRepository>(() => appModule.userRepository);
-    gh.factory<_i9.UserUseCase>(() => appModule.userUseCase);
+    gh.factory<_i8.FirebaseStorage>(() => appModule.firebaseStorage);
+    gh.factory<_i8.Reference>(() => appModule.userStorageReference);
+    gh.factory<_i9.UserRepository>(() => appModule.userRepository);
+    gh.factory<_i10.UserUseCase>(() => appModule.userUseCase);
     return this;
   }
 }
 
-class _$AppModule extends _i10.AppModule {}
+class _$AppModule extends _i11.AppModule {}

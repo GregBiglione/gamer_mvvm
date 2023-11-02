@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gamer_mvvm/src/data/repository/auth_repository_implementer.dart';
 import 'package:gamer_mvvm/src/data/repository/user_repository_implementer.dart';
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
@@ -24,19 +25,28 @@ abstract class AppModule {
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
 
   @injectable
+  FirebaseStorage get firebaseStorage => FirebaseStorage.instance;
+
+  @injectable
   AuthRepository get authRepository => AuthRepositoryImplementer(
     firebaseAuth,
     usersCollection,
   );
 
   @injectable
-  UserRepository get userRepository => UserRepositoryImplementer(usersCollection);
+  UserRepository get userRepository => UserRepositoryImplementer(
+    usersCollection,
+    userStorageReference,
+  );
 
   @injectable
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
 
   @injectable
   CollectionReference get usersCollection => firebaseFirestore.collection("Users");
+
+  @injectable
+  Reference get userStorageReference => firebaseStorage.ref().child("Users");
 
   @injectable
   AuthUseCase get loginUseCase => AuthUseCase(
