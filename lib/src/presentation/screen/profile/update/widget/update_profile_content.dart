@@ -35,7 +35,7 @@ class _UpdateProfileContentState extends State<UpdateProfileContent> {
               ClipPath(
                 clipper: OvalBottomBorderClipper(),
                 child: Image.asset(
-                  "assets/images/background.jpg",
+                  "assets/images/super_nintendo.jpg",
                   width: double.infinity,
                   height: 300,
                   fit: BoxFit.cover,
@@ -63,10 +63,16 @@ class _UpdateProfileContentState extends State<UpdateProfileContent> {
                     ),
                   ),
                   // Profile image ---------------------------------------------
-                  Image.asset(
-                    "assets/images/user_menu.png",
-                    width: 120,
-                    height: 120,
+                  GestureDetector(
+                    onTap: () {
+                      widget.updateProfileViewModel.pickImage();
+                    },
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage: widget.updateProfileViewModel.imageFile != null
+                          ? FileImage(widget.updateProfileViewModel.imageFile!)
+                          : const AssetImage("assets/images/user_menu.png") as ImageProvider,
+                    ),
                   ),
                 ],
               ),
