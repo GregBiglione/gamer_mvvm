@@ -73,10 +73,12 @@ class _UpdateProfileContentState extends State<UpdateProfileContent> {
                       );
                     },
                     child: CircleAvatar(
-                      radius: 60,
+                      radius: 75,
                       backgroundImage: widget.updateProfileViewModel.imageFile != null
                           ? FileImage(widget.updateProfileViewModel.imageFile!)
-                          : const AssetImage("assets/images/user_menu.png") as ImageProvider,
+                          : widget.userData.image.isNotEmpty
+                              ? NetworkImage(widget.userData.image)
+                              : const AssetImage("assets/images/user_menu.png") as ImageProvider,
                     ),
                   ),
                 ],

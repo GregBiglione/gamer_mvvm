@@ -50,10 +50,11 @@ class ProfileContent extends StatelessWidget {
                     ),
                   ),
                   // Profile image ---------------------------------------------
-                  Image.asset(
-                    "assets/images/user_menu.png",
-                    width: 120,
-                    height: 120,
+                  CircleAvatar(
+                    radius: 75,
+                    backgroundImage: userData.image.isNotEmpty
+                        ? NetworkImage(userData.image)
+                        : const AssetImage("assets/images/user_menu.png") as ImageProvider,
                   ),
                 ],
               ),
