@@ -129,7 +129,7 @@ class _UpdateProfileContentState extends State<UpdateProfileContent> {
             child: DefaultButton(
               text: "Actualizar información",
               onPressed: () {
-                widget.updateProfileViewModel.updateWithoutImage();
+                widget.updateProfileViewModel.updateUser();
               },
               iconData: Icons.edit,
               color: Colors.white,

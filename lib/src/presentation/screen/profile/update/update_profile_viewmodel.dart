@@ -52,14 +52,21 @@ class UpdateProfileViewModel extends ChangeNotifier {
   // Update
   //----------------------------------------------------------------------------
 
-  updateWithoutImage() async {
-    // Loading -----------------------------------------------------------------
-    _response = Loading();
-    notifyListeners();
-    // Update ------------------------------------------------------------------
-    _response = await _userUseCase.updateUserUseCaseWithoutImage
-        .launch(_updateProfileState.toUser());
-    notifyListeners();
+  updateUser() async {
+    if(_updateProfileState.isValid()) {
+      // Loading ---------------------------------------------------------------
+      _response = Loading();
+      notifyListeners();
+      // Update ----------------------------------------------------------------
+      if (_imageFile != null) {
+        _response = await _userUseCase.updateImageUseCase
+            .launch(_updateProfileState.toUser(), _imageFile!);
+      } else {
+        _response = await _userUseCase.updateUserUseCaseWithoutImage
+            .launch(_updateProfileState.toUser());
+      }
+      notifyListeners();
+    }
   }
 
   // ---------------------------------------------------------------------------

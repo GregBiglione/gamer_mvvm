@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/domain/repository/user_repository.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
+import 'package:path/path.dart';
 
 class UserRepositoryImplementer implements UserRepository {
   final CollectionReference _userReference;
@@ -46,13 +46,14 @@ class UserRepositoryImplementer implements UserRepository {
   @override
   Future<Resource<String>> updateWithImage(UserData userData, File image) async {
     try {
-      UploadTask uploadTask = _userStorageReference.putFile(
+      String name = basename(image.path);
+      TaskSnapshot taskSnapshot = await _userStorageReference.child(name).putFile(
         image,
         SettableMetadata(
           contentType: "image/png"
         ),
       );
-      String url = await uploadTask.snapshot.ref.getDownloadURL();
+      String url = await taskSnapshot.ref.getDownloadURL();
       Map<String, dynamic> map = {
         "image": url,
         "username": userData.username,
