@@ -5,6 +5,7 @@ import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart';
 import 'package:gamer_mvvm/src/injection.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/create/create_post_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
           "register": (BuildContext context) => const RegisterScreen(),
           "home": (BuildContext context) => const HomeScreen(),
           "profile/update": (BuildContext context) => const UpdateProfileScreen(),
-          "profile/update": (BuildContext context) => const MyPostListScreen(),
+          "post/create": (BuildContext context) => const CreatePostScreen(),
         },
       ),
     );
