@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/utils/show_select_image_dialog.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_textfield.dart';
 import '../../../../widget/default_button.dart';
 
@@ -65,7 +66,11 @@ class _UpdateProfileContentState extends State<UpdateProfileContent> {
                   // Profile image ---------------------------------------------
                   GestureDetector(
                     onTap: () {
-                      widget.updateProfileViewModel.pickImage();
+                      showSelectImageDialog(
+                        context,
+                        () => widget.updateProfileViewModel.takePhoto(),
+                        () => widget.updateProfileViewModel.pickImage(),
+                      );
                     },
                     child: CircleAvatar(
                       radius: 60,
