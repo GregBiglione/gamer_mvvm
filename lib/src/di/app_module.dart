@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gamer_mvvm/src/data/repository/auth_repository_implementer.dart';
+import 'package:gamer_mvvm/src/data/repository/post_repository_implementer.dart';
 import 'package:gamer_mvvm/src/data/repository/user_repository_implementer.dart';
 import 'package:gamer_mvvm/src/domain/repository/auth_repository.dart';
+import 'package:gamer_mvvm/src/domain/repository/post_repository.dart';
 import 'package:gamer_mvvm/src/domain/repository/user_repository.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/login_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/logout_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/register_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/user_session_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/post/create_post_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/post/post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/update_image_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/update_user_usecase.dart';
@@ -41,6 +45,12 @@ abstract class AppModule {
   );
 
   @injectable
+  PostRepository get postRepository => PostRepositoryImplementer(
+    postsCollection,
+    postsStorageReference,
+  );
+
+  @injectable
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
 
   @injectable
@@ -68,5 +78,10 @@ abstract class AppModule {
     getUserByIdUseCase: GetUserByIdUseCase(userRepository), 
     updateUserUseCaseWithoutImage: UpdateUserUseCase(userRepository),
     updateImageUseCase: UpdateImageUseCase(userRepository),
+  );
+
+  @injectable
+  PostUseCase get postUseCase => PostUseCase(
+      createPostUseCase: CreatePostUseCase(postRepository),
   );
 }
