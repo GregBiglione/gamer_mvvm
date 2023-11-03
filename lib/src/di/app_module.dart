@@ -50,6 +50,12 @@ abstract class AppModule {
   Reference get userStorageReference => firebaseStorage.ref().child("Users");
 
   @injectable
+  CollectionReference get postsCollection => firebaseFirestore.collection("Posts");
+
+  @injectable
+  Reference get postsStorageReference => firebaseStorage.ref().child("Posts");
+
+  @injectable
   AuthUseCase get loginUseCase => AuthUseCase(
     loginUseCase: LoginUseCase(authRepository), 
     registerUseCase: RegisterUseCase(authRepository),
