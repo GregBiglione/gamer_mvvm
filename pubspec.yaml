@@ -76,6 +76,11 @@ flutter:
     - assets/images/background.jpg
     - assets/images/super_nintendo.jpg
     - assets/images/user_menu.png
+    - assets/images/add_image.png
+    - assets/images/icon_nintendo.png
+    - assets/images/icon_pc.png
+    - assets/images/icon_ps4.png
+    - assets/images/icon_xbox.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
