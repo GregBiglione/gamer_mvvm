@@ -74,6 +74,7 @@ flutter:
   assets:
     - assets/images/gamepad.png
     - assets/images/background.jpg
+    - assets/images/gallery.png
     - assets/images/super_nintendo.jpg
     - assets/images/user_menu.png
     - assets/images/add_image.png

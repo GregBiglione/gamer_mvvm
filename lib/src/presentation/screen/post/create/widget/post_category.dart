@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:gamer_mvvm/src/presentation/utils/base_color.dart';
 
 class PostCategory  extends StatelessWidget {
   final String value;
@@ -21,8 +24,9 @@ class PostCategory  extends StatelessWidget {
           Radio(
               value: value,
               groupValue: groupValue,
+              activeColor: baseColor,
               onChanged: (value) {
-                onChanged;
+                onChanged(value ?? "");
               }
           ),
           SizedBox(

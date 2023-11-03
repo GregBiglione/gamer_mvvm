@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/create/create_post_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/create/widget/post_category.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_button.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_textfield.dart';
 
 import '../../../../utils/base_color.dart';
+import '../../../../utils/show_select_image_dialog.dart';
 
 class CreatePostContent extends StatelessWidget {
-  const CreatePostContent({super.key});
+  final CreatePostViewModel createPostViewModel;
+
+  const CreatePostContent({super.key, required this.createPostViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,39 @@ class CreatePostContent extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                  GestureDetector(
+                    onTap: () {
+                      showSelectImageDialog(
+                        context,
+                        () => createPostViewModel.takePhoto(),
+                        () => createPostViewModel.pickImage(),
+                      );
+                    },
+                    child: createPostViewModel.imageFile != null
+                        ? Image.file(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height * 0.35,
+                            createPostViewModel.imageFile!,
+                            fit: BoxFit.cover,
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/gallery.png",
+                                width: 150,
+                                height: 100,
+                              ),
+                              const Text(
+                                "SELECCIONA UNA IMAGEN",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
+                  ),
                   Container(
                     alignment: Alignment.topLeft,
                     margin: const EdgeInsets.only(
@@ -41,24 +78,6 @@ class CreatePostContent extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/add_image.png",
-                        width: 150,
-                        height: 100,
-                      ),
-                      const Text(
-                        "SELECCIONA UNA IMAGEN",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -72,7 +91,10 @@ class CreatePostContent extends StatelessWidget {
             child: DefaultTextField(
               label: "Nombre del juego",
               iconData: Icons.control_camera,
-              onChanged: (value) {},
+              onChanged: (value) {
+                createPostViewModel.changeName(value);
+              },
+              error: createPostViewModel.createPostState.name.error,
             ),
           ),
           // Description -------------------------------------------------------
@@ -84,7 +106,10 @@ class CreatePostContent extends StatelessWidget {
             child: DefaultTextField(
               label: "Descripción",
               iconData: Icons.description,
-              onChanged: (value) {},
+              onChanged: (value) {
+                createPostViewModel.changeDescription(value);
+              },
+              error: createPostViewModel.createPostState.description.error,
             ),
           ),
           // Categories title --------------------------------------------------
@@ -105,27 +130,50 @@ class CreatePostContent extends StatelessWidget {
           // Categories --------------------------------------------------------
           PostCategory(
             value: "PC",
-            groupValue: "CATEGORIAS",
-            onChanged: (value) {},
+            groupValue: createPostViewModel.createPostState.category,
+            onChanged: (value) {
+              createPostViewModel.changeCategory(value);
+            },
             image: "assets/images/icon_pc.png",
           ),
           PostCategory(
             value: "XBOX",
-            groupValue: "CATEGORIAS",
-            onChanged: (value) {},
+            groupValue: createPostViewModel.createPostState.category,
+            onChanged: (value) {
+              createPostViewModel.changeCategory(value);
+            },
             image: "assets/images/icon_xbox.png",
           ),
           PostCategory(
             value: "PLAYSTATION",
-            groupValue: "CATEGORIAS",
-            onChanged: (value) {},
+            groupValue: createPostViewModel.createPostState.category,
+            onChanged: (value) {
+              createPostViewModel.changeCategory(value);
+            },
             image: "assets/images/icon_ps4.png",
           ),
           PostCategory(
             value: "NINTENDO",
-            groupValue: "CATEGORIAS",
-            onChanged: (value) {},
+            groupValue: createPostViewModel.createPostState.category,
+            onChanged: (value) {
+              createPostViewModel.changeCategory(value);
+            },
             image: "assets/images/icon_nintendo.png",
+          ),
+          // Form error --------------------------------------------------------
+          Container(
+            margin: const EdgeInsets.only(
+             left: 20,
+             top: 10,
+             right: 20,
+            ),
+            child: Text(
+              createPostViewModel.createPostState.error,
+              style: const TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+              ),
+            ),
           ),
           // Create post button ------------------------------------------------
           Container(
@@ -136,7 +184,10 @@ class CreatePostContent extends StatelessWidget {
             ),
             child: DefaultButton(
               text: "CREAR POST",
-              onPressed: () {},
+              onPressed: () {
+                createPostViewModel.createPost();
+                //print("Image: ${createPostViewModel.imageFile}\nName: ${createPostViewModel.createPostState.name.value}\nDescription: ${createPostViewModel.createPostState.description.value}\nCategory: ${createPostViewModel.createPostState.category}\nUserId: ${createPostViewModel.createPostState.userId}\n");
+              },
             ),
           ),
         ],

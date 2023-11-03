@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
 class CreatePostState {
-  String image;
+  File? image;
   ValidationItem name;
   ValidationItem description;
   String category;
@@ -9,15 +10,15 @@ class CreatePostState {
   String error;
 
   CreatePostState({
-    this.image = "",
+    this.image = null,
     this.name = const ValidationItem(),
     this.description = const ValidationItem(),
-    this.category = "",
+    this.category = "CATEGORY",
     this.userId = "",
     this.error = "",
   });
 
-  CreatePostState copyWith({String? image, ValidationItem? name,
+  CreatePostState copyWith({File? image, ValidationItem? name,
     ValidationItem? description, String? category, String? userId,
     String? error}) =>  CreatePostState(
       image: image ?? this.image,
@@ -27,4 +28,13 @@ class CreatePostState {
       userId: userId ?? this.userId,
       error: error ?? this.error,
   );
+
+  bool isValid() {
+    if(image == null ||name.value.isEmpty || name.error.isNotEmpty
+        || description.value.isEmpty || description.error.isNotEmpty
+        || category.isEmpty || userId.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 }
