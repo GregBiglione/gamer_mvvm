@@ -4,13 +4,19 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
 import 'package:gamer_mvvm/src/domain/repository/user_repository.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
+import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
+
+import '../../core/constant.dart';
 
 class UserRepositoryImplementer implements UserRepository {
   final CollectionReference _userReference;
   final Reference _userStorageReference;
 
-  UserRepositoryImplementer(this._userReference, this._userStorageReference);
+  UserRepositoryImplementer(
+    @Named(USER) this._userReference,
+    @Named(USER) this._userStorageReference,
+  );
 
   @override
   Stream<Resource<UserData>> getUserById(String id) {

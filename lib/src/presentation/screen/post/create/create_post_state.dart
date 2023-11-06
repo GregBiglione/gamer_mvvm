@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:gamer_mvvm/src/domain/model/post.dart';
 import 'package:gamer_mvvm/src/presentation/utils/validation_item.dart';
 
 class CreatePostState {
@@ -27,6 +28,13 @@ class CreatePostState {
       category: category ?? this.category,
       userId: userId ?? this.userId,
       error: error ?? this.error,
+  );
+
+  toPost() => Post(
+    name: name.value,
+    description: description.value,
+    category: category,
+    userId: userId,
   );
 
   bool isValid() {

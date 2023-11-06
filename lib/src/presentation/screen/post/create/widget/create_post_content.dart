@@ -36,7 +36,7 @@ class CreatePostContent extends StatelessWidget {
                         () => createPostViewModel.pickImage(),
                       );
                     },
-                    child: createPostViewModel.imageFile != null
+                    child: createPostViewModel.createPostState.image != null
                         ? Image.file(
                             width: double.infinity,
                             height: MediaQuery.of(context).size.height * 0.35,
@@ -89,6 +89,8 @@ class CreatePostContent extends StatelessWidget {
               right: 20,
             ),
             child: DefaultTextField(
+              controller: createPostViewModel.nameController,
+              //initialValue: createPostViewModel.createPostState.name.value,
               label: "Nombre del juego",
               iconData: Icons.control_camera,
               onChanged: (value) {
@@ -104,6 +106,8 @@ class CreatePostContent extends StatelessWidget {
               right: 20,
             ),
             child: DefaultTextField(
+              controller: createPostViewModel.descriptionController,
+              //initialValue: createPostViewModel.createPostState.description.value,
               label: "Descripción",
               iconData: Icons.description,
               onChanged: (value) {

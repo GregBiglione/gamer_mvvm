@@ -36,6 +36,6 @@ class Post {
   };
 }
 
-Post PostFromJson(String str) => Post.fromJson(json.decode(str));
+Post fromJson(String str) => Post.fromJson(json.decode(str));
 
-String PostToJson(Post data) => json.encode(data.toJson());
+String toJson(Post data) => json.encode(data.toJson());

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:gamer_mvvm/src/core/constant.dart';
 import 'package:gamer_mvvm/src/data/repository/auth_repository_implementer.dart';
 import 'package:gamer_mvvm/src/data/repository/post_repository_implementer.dart';
 import 'package:gamer_mvvm/src/data/repository/user_repository_implementer.dart';
@@ -53,17 +54,21 @@ abstract class AppModule {
   @injectable
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
 
+  @Named(USER)
   @injectable
-  CollectionReference get usersCollection => firebaseFirestore.collection("Users");
+  CollectionReference get usersCollection => firebaseFirestore.collection(USER);
 
+  @Named(USER)
   @injectable
-  Reference get userStorageReference => firebaseStorage.ref().child("Users");
+  Reference get userStorageReference => firebaseStorage.ref().child(USER);
 
+  @Named(POST)
   @injectable
-  CollectionReference get postsCollection => firebaseFirestore.collection("Posts");
+  CollectionReference get postsCollection => firebaseFirestore.collection(POST);
 
+  @Named(POST)
   @injectable
-  Reference get postsStorageReference => firebaseStorage.ref().child("Posts");
+  Reference get postsStorageReference => firebaseStorage.ref().child(POST);
 
   @injectable
   AuthUseCase get loginUseCase => AuthUseCase(
