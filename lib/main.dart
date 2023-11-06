@@ -9,6 +9,7 @@ import 'package:gamer_mvvm/src/presentation/screen/home/home_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/home/home_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/create/create_post_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/create/create_post_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/list/post_list_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CreatePostViewModel(
             locator<AuthUseCase>(),
             locator<PostUseCase>(),),
+        ),
+        ChangeNotifierProvider(create: (context) => PostListViewModel(
+          locator<PostUseCase>(),),
         ),
       ],
       child: MaterialApp(
