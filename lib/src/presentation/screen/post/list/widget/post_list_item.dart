@@ -10,7 +10,11 @@ class PostListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, "post/detail");
+        Navigator.pushNamed(
+          context,
+          "post/detail",
+          arguments: post,
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(
