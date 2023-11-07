@@ -6,4 +6,5 @@ abstract class UserRepository {
   Stream<Resource<UserData>> getUserById(String id);
   Future<Resource<String>> updateWithoutImage(UserData userData);
   Future<Resource<String>> updateWithImage(UserData userData, File image);
+  Future<UserData> getUserByIdOnce(String id);
 }

@@ -15,6 +15,7 @@ import 'package:gamer_mvvm/src/domain/use_case/auth/user_session_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/create_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/get_all_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/post_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_once_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/update_image_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/update_user_usecase.dart';
@@ -84,6 +85,7 @@ abstract class AppModule {
     getUserByIdUseCase: GetUserByIdUseCase(userRepository), 
     updateUserUseCaseWithoutImage: UpdateUserUseCase(userRepository),
     updateImageUseCase: UpdateImageUseCase(userRepository),
+    getUserByIdOnceUseCase: GetUserByIdOnceUseCase(userRepository),
   );
 
   @injectable

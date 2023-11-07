@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/model/post.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/detail/post_detail_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/detail/widget/post_user_detail_info.dart';
 import 'package:gamer_mvvm/src/presentation/utils/base_color.dart';
 
 class PostDetailContent extends StatelessWidget {
@@ -48,55 +49,27 @@ class PostDetailContent extends StatelessWidget {
             ]
           ),
           // Card user information ---------------------------------------------
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            height: 90,
-            child: Card(
-              color: const Color.fromARGB(255, 58, 58, 58),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 20,
-                    ),
-                    child: const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(
-                        "assets/images/super_nintendo.jpg"
-                      ),
-                    ),
+          FutureBuilder(
+            future: viewModel.getUser(post.userId),
+            builder: (context, snapshot) {
+              if(snapshot.data == null) {
+                return Container();
+              }
+              final data = snapshot.data;
+
+              return // Card user information ----------------------------------
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: 15,
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Nombre del usario",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "Email",
-                          style: TextStyle(
-                              color: Colors.white
-                          ),
-                        ),
-                      ],
-                    ),
+                  height: 90,
+                  child: Card(
+                    color: const Color.fromARGB(255, 58, 58, 58),
+                    child: PostUserDetailInfo(userData: data!),
                   ),
-                ],
-              ),
-            ),
+                );
+            },
           ),
           // Game name ---------------------------------------------------------
           Container(

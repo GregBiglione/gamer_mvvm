@@ -71,4 +71,21 @@ class UserRepositoryImplementer implements UserRepository {
       return Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Future<UserData> getUserByIdOnce(String id) async {
+    try {
+      final document = await _userReference.doc(id).get();
+
+      if(document.exists) {
+        UserData userData = UserData.fromJson(document.data() as Map<String, dynamic>);
+
+        return userData;
+      }
+
+      return UserData();
+    } on FirebaseException catch (e) {
+      throw Error(e.message ?? "Error desconocido");
+    }
+  }
 }
