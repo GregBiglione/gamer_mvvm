@@ -44,7 +44,10 @@ class MyPostListScreen extends StatelessWidget {
             return ListView.builder(
               itemCount: postList.data.length,
               itemBuilder: (context, index) {
-                return MyPostListItem(post: postList.data[index]);
+                return MyPostListItem(
+                  post: postList.data[index],
+                  viewModel: viewModel,
+                );
               },
             );
           },

@@ -65,8 +65,15 @@ class PostRepositoryImplementer implements PostRepository {
       final mapData = data.map(
             (document) => Success(
           (document.docs.map(
-                  (post) => Post.fromJson(post.data() as Map<String, dynamic>))
-              .toList()
+                (post) {
+                  final id = post.id;
+                  final map = {
+                    ...post.data() as Map<String, dynamic>,
+                    "id": id,
+                  };
+                  return Post.fromJson(map);
+                }
+                  ).toList()
           ),
         ),
       );

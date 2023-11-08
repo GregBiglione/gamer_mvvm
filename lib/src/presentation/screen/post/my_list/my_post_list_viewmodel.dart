@@ -18,4 +18,9 @@ class MyPostListViewModel extends ChangeNotifier {
 
     return _postUseCase.getAllPostByIdUseCase.launch(userId);
   }
+
+  deletePost(String postId) async {
+    await _postUseCase.deletePostUseCase.launch(postId);
+    notifyListeners();
+  }
 }
