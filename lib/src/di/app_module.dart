@@ -13,6 +13,7 @@ import 'package:gamer_mvvm/src/domain/use_case/auth/logout_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/register_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/user_session_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/create_post_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/post/get_all_post_by_id_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/get_all_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_once_usecase.dart';
@@ -92,5 +93,6 @@ abstract class AppModule {
   PostUseCase get postUseCase => PostUseCase(
     createPostUseCase: CreatePostUseCase(postRepository),
     getAllPostUseCase: GetAllPostUseCase(postRepository),
+    getAllPostByIdUseCase: GetAllPostByIdUseCase(postRepository),
   );
 }
