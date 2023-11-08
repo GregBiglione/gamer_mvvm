@@ -76,4 +76,15 @@ class PostRepositoryImplementer implements PostRepository {
       throw Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Future<Resource<String>> delete(String postId) async {
+    try {
+      _postsCollection.doc(postId).delete();
+
+      return Success("El post se ha eliminado correctamente");
+    } on FirebaseException catch (e) {
+      throw Error(e.message ?? "Error desconocido");
+    }
+  }
 }
