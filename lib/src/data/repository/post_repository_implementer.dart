@@ -55,4 +55,25 @@ class PostRepositoryImplementer implements PostRepository {
       throw Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Stream<Resource<List<Post>>> getAllPostById(String id) {
+    try {
+      final data = _postsCollection
+          .where("userId", isEqualTo: id)
+          .snapshots(includeMetadataChanges: true);
+      final mapData = data.map(
+            (document) => Success(
+          (document.docs.map(
+                  (post) => Post.fromJson(post.data() as Map<String, dynamic>))
+              .toList()
+          ),
+        ),
+      );
+
+      return mapData;
+    } on FirebaseException catch (e) {
+      throw Error(e.message ?? "Error desconocido");
+    }
+  }
 }

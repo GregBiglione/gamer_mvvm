@@ -22,7 +22,7 @@ class PostListItem extends StatelessWidget {
           bottom: 5,
         ),
         child: Card(
-          color: Colors.white,
+          color: const Color.fromARGB(255, 58, 58, 58),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -39,13 +39,14 @@ class PostListItem extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(
                   horizontal: 20,
-                    vertical: 10
+                    vertical: 10,
                 ),
                 child: Text(
                   post.name,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -53,11 +54,13 @@ class PostListItem extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(
                   horizontal: 20,
+                  vertical: 10,
                 ),
                 child: Text(
                   post.description,
                   style: const TextStyle(
                     fontSize: 15,
+                    color: Colors.white
                   ),
                 ),
               ),
