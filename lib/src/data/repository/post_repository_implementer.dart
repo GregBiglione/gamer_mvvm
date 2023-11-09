@@ -135,4 +135,38 @@ class PostRepositoryImplementer implements PostRepository {
       throw Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Future<Resource<bool>> like(String postId, String userId) async {
+    try {
+      await _postsCollection
+          .doc(postId)
+          .update(
+        {
+          "likes": FieldValue.arrayUnion([userId]),
+        }
+      );
+
+      return Success(true);
+    } on FirebaseException catch (e) {
+      return Error(e.message ?? "Error desconocido");
+    }
+  }
+
+  @override
+  Future<Resource<bool>> unlike(String postId, String userId) async {
+    try {
+      await _postsCollection
+          .doc(postId)
+          .update(
+          {
+            "likes": FieldValue.arrayRemove([userId]),
+          }
+      );
+
+      return Success(true);
+    } on FirebaseException catch (e) {
+      return Error(e.message ?? "Error desconocido");
+    }
+  }
 }
