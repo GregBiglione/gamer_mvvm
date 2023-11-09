@@ -17,6 +17,8 @@ import 'package:gamer_mvvm/src/domain/use_case/post/delete_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/get_all_post_by_id_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/get_all_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/post_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/post/update_post_usecase.dart';
+import 'package:gamer_mvvm/src/domain/use_case/post/update_post_with_image_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_once_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/get_user_by_id_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/update_image_usecase.dart';
@@ -96,5 +98,7 @@ abstract class AppModule {
     getAllPostUseCase: GetAllPostUseCase(postRepository),
     getAllPostByIdUseCase: GetAllPostByIdUseCase(postRepository),
     deletePostUseCase: DeletePostUseCase(postRepository),
+    updatePostUseCase: UpdatePostUseCase(postRepository),
+    updatePostWithImageUseCase: UpdatePostWithImageUseCase(postRepository),
   );
 }

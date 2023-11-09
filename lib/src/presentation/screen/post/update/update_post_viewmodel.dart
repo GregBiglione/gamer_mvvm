@@ -112,22 +112,28 @@ class UpdatePostViewModel extends ChangeNotifier {
 
   updatePost() async {
     print("State: ${_state.toPost().toJson()}");
-    /*if(_state.isValid()) {
-      //print("Formulario valido !!!!!!!!!!!!!!!!!!!!!!!");
+    if(_state.isValid()) {
       _response = Loading();
       notifyListeners();
-      *//*_response = await _postUseCase.createPostUseCase.launch(
-        _state.toPost(),
-        _state.image!,
-      );*//*
+      if (_imageFile == null) {
+        _response = await _postUseCase.updatePostUseCase.launch(
+          _state.toPost(),
+        );
+      }
+      else {
+        _response = await _postUseCase.updatePostWithImageUseCase.launch(
+          _state.toPost(),
+          _imageFile!,
+        );
+      }
       notifyListeners();
-      print("POst added succesfully");
+      print("Post added succesfully");
     }
     else {
       _state = _state.copyWith(error: "Debes completar todos los campos");
       print("Formulario no valido");
       notifyListeners();
-    }*/
+    }
   }
 
   // ---------------------------------------------------------------------------
