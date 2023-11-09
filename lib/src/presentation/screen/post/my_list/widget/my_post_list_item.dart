@@ -73,7 +73,13 @@ class MyPostListItem extends StatelessWidget {
                   children: [
                     // Edit ----------------------------------------------------
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          "post/update",
+                          arguments: post,
+                        );
+                      },
                       icon: const Icon(
                         Icons.edit,
                         color: Colors.white,

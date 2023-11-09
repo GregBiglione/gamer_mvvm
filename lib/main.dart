@@ -14,6 +14,8 @@ import 'package:gamer_mvvm/src/presentation/screen/post/detail/post_detail_viewm
 import 'package:gamer_mvvm/src/presentation/screen/post/list/post_list_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_viewmodel.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/update/update_post_screen.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/update/update_post_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_viewmodel.dart';
@@ -62,6 +64,10 @@ class MyApp extends StatelessWidget {
           locator<PostUseCase>(),
           locator<AuthUseCase>(),),
         ),
+        ChangeNotifierProvider(create: (context) => UpdatePostViewModel(
+          locator<AuthUseCase>(),
+          locator<PostUseCase>(),),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -78,6 +84,7 @@ class MyApp extends StatelessWidget {
           "profile/update": (BuildContext context) => const UpdateProfileScreen(),
           "post/create": (BuildContext context) => const CreatePostScreen(),
           "post/detail": (BuildContext context) => const PostDetailScreen(),
+          "post/update": (BuildContext context) => const UpdatePostScreen(),
         },
       ),
     );
