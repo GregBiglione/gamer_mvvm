@@ -30,7 +30,7 @@ class UpdatePostViewModel extends ChangeNotifier {
 
 
   // Setters -------------------------------------------------------------------
-  loadData(Post post) {
+  Future<void> loadData(Post post) async {
     print("UserData VM: ${post.toJson()}");
     if(_state.id.isEmpty) {
       _state = _state.copyWith(
@@ -119,15 +119,17 @@ class UpdatePostViewModel extends ChangeNotifier {
         _response = await _postUseCase.updatePostUseCase.launch(
           _state.toPost(),
         );
+        //print("Update without photo: ${_state.toPost().toJson()}");
       }
       else {
         _response = await _postUseCase.updatePostWithImageUseCase.launch(
           _state.toPost(),
           _imageFile!,
         );
+        //print("Update with photo: ${_state.toPost().toJson()}\nImage: $_imageFile");
       }
       notifyListeners();
-      print("Post added succesfully");
+      //print("Post added succesfully");
     }
     else {
       _state = _state.copyWith(error: "Debes completar todos los campos");
@@ -140,10 +142,10 @@ class UpdatePostViewModel extends ChangeNotifier {
   // Reset response
   // ---------------------------------------------------------------------------
 
-  /*resetResponse() {
+  resetResponse() {
     _response = Init();
     notifyListeners();
-  }*/
+  }
 
   // ---------------------------------------------------------------------------
   // Reset state
@@ -151,8 +153,6 @@ class UpdatePostViewModel extends ChangeNotifier {
 
   /*resetState() {
     _state = UpdatePostState();
-    //_state.image = null;
-    //_state.category = "";
     notifyListeners();
   }*/
 }

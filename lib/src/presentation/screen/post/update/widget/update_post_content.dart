@@ -200,7 +200,7 @@ class UpdatePostContent extends StatelessWidget {
               text: "ACTUALIZAR POST",
               onPressed: () {
                 viewModel.updatePost();
-                //print("Image: ${viewModel.imageFile}\nName: ${viewModel.state.name.value}\nDescription: ${viewModel.state.description.value}\nCategory: ${viewModel.state.category}\nUserId: ${viewModel.state.userId}\n");
+                print("Image: ${viewModel.imageFile}\nName: ${viewModel.state.name.value}\nDescription: ${viewModel.state.description.value}\nCategory: ${viewModel.state.category}\nUserId: ${viewModel.state.userId}\n");
               },
             ),
           ),

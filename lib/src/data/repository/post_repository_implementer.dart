@@ -128,6 +128,7 @@ class PostRepositoryImplementer implements PostRepository {
         "description": post.description,
         "category": post.category,
       };
+      await _postsCollection.doc(post.id).update(map);
 
       return Success("El post se ha actualizado correctamente");
     } on FirebaseException catch (e) {

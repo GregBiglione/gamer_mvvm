@@ -14,6 +14,10 @@ class UpdatePostScreen extends StatelessWidget {
     UpdatePostViewModel viewModel = Provider.of<UpdatePostViewModel>(context);
     Post post = ModalRoute.of(context)?.settings.arguments as Post;
 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      UpdatePostResponse(viewModel, context);
+    });
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: FutureBuilder(
