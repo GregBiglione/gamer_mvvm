@@ -94,4 +94,44 @@ class PostRepositoryImplementer implements PostRepository {
       throw Error(e.message ?? "Error desconocido");
     }
   }
+
+  @override
+  Future<Resource<String>> update(Post post) async {
+    try {
+      Map<String, dynamic> map = {
+        "name": post.name,
+        "description": post.description,
+        "category": post.category,
+      };
+      await _postsCollection.doc(post.id).update(map);
+
+      return Success("El post se ha actualizado correctamente");
+    } on FirebaseException catch (e) {
+      throw Error(e.message ?? "Error desconocido");
+    }
+  }
+
+  @override
+  Future<Resource<String>> updateWithImage(Post post, File image) async {
+    try {
+      String name = basename(image.path);
+      TaskSnapshot taskSnapshot = await _postsStorageReference.child(name).putFile(
+        image,
+        SettableMetadata(
+            contentType: "image/png"
+        ),
+      );
+      String url = await taskSnapshot.ref.getDownloadURL();
+      Map<String, dynamic> map = {
+        "image": url,
+        "name": post.name,
+        "description": post.description,
+        "category": post.category,
+      };
+
+      return Success("El post se ha actualizado correctamente");
+    } on FirebaseException catch (e) {
+      throw Error(e.message ?? "Error desconocido");
+    }
+  }
 }

@@ -12,8 +12,8 @@ class UpdatePostContent extends StatelessWidget {
   final UpdatePostViewModel viewModel;
   final Post post;
 
-  const UpdatePostContent(
-      {super.key, required this.viewModel, required this.post});
+  const UpdatePostContent({super.key, required this.viewModel,
+    required this.post});
 
   @override
   Widget build(BuildContext context) {
