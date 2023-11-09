@@ -7,6 +7,7 @@ class Post {
   String description;
   String category;
   String userId;
+  List<String> likes;
 
   Post({
     this.id = "",
@@ -15,6 +16,7 @@ class Post {
     this.description = "",
     this.category = "",
     this.userId = "",
+    this.likes = const [],
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -24,6 +26,7 @@ class Post {
     description: json["description"] ?? "",
     category: json["category"] ?? "",
     userId: json["userId"] ?? "",
+    likes: json["likes"] ?? [],
   );
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +36,7 @@ class Post {
     "description": description,
     "category": category,
     "userId": userId,
+    "likes": likes,
   };
 }
 
