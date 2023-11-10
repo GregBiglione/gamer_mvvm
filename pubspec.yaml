@@ -82,6 +82,8 @@ flutter:
     - assets/images/icon_pc.png
     - assets/images/icon_ps4.png
     - assets/images/icon_xbox.png
+    - assets/images/like.png
+    - assets/images/like_outline.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

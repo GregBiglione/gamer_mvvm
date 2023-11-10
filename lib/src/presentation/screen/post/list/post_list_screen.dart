@@ -25,7 +25,12 @@ class PostListScreen extends StatelessWidget {
           }
           if(!snapshot.hasData) {
             return const Center(
-              child: Text("No hay información"),
+              child: Text(
+                "No hay información",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             );
           }
 
@@ -34,7 +39,12 @@ class PostListScreen extends StatelessWidget {
             final data = response as Error;
 
             return Center(
-              child: Text("Error: ${data.error}"),
+              child: Text(
+                "Error: ${data.error}",
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             );
           }
 
@@ -42,7 +52,10 @@ class PostListScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: postList.data.length,
             itemBuilder: (context, index) {
-              return PostListItem(post: postList.data[index]);
+              return PostListItem(
+                post: postList.data[index],
+                viewModel: viewModel,
+              );
             },
           );
         },

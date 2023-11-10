@@ -26,7 +26,7 @@ class Post {
     description: json["description"] ?? "",
     category: json["category"] ?? "",
     userId: json["userId"] ?? "",
-    likes: json["likes"] ?? [],
+    likes: json["likes"] != null ? List.from(json["likes"]) : [],
   );
 
   Map<String, dynamic> toJson() => {

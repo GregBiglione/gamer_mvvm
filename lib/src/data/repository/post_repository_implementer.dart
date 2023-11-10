@@ -44,10 +44,18 @@ class PostRepositoryImplementer implements PostRepository {
       final data = _postsCollection.snapshots(includeMetadataChanges: true);
       final mapData = data.map(
             (document) => Success(
-                (document.docs.map(
-                        (post) => Post.fromJson(post.data() as Map<String, dynamic>)).toList()
-                ),
-            ),
+          (document.docs.map(
+                  (post) {
+                final id = post.id;
+                final map = {
+                  ...post.data() as Map<String, dynamic>,
+                  "id": id,
+                };
+                return Post.fromJson(map);
+              }
+          ).toList()
+          ),
+        ),
       );
 
       return mapData;

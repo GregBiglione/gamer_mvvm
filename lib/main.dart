@@ -54,7 +54,9 @@ class MyApp extends StatelessWidget {
             locator<PostUseCase>(),),
         ),
         ChangeNotifierProvider(create: (context) => PostListViewModel(
-          locator<PostUseCase>(),),
+          locator<PostUseCase>(),
+          locator<AuthUseCase>(),
+        ),
         ),
         ChangeNotifierProvider(create: (context) => PostDetailViewModel(
           locator<PostUseCase>(),
