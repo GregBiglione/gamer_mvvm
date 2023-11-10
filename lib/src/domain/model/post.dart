@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:gamer_mvvm/src/domain/model/user_data.dart';
+
 class Post {
   String id;
   String image;
@@ -8,6 +10,7 @@ class Post {
   String category;
   String userId;
   List<String> likes;
+  UserData? userData;
 
   Post({
     this.id = "",
@@ -17,6 +20,7 @@ class Post {
     this.category = "",
     this.userId = "",
     this.likes = const [],
+    this.userData,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(

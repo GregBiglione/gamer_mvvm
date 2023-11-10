@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/model/post.dart';
+import 'package:gamer_mvvm/src/presentation/screen/post/list/widget/post_list_user_info.dart';
 
 import '../post_list_viewmodel.dart';
 
@@ -43,7 +44,7 @@ class PostListItem extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title ---------------------------------------------------------
+                      // Title -------------------------------------------------
                       Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -58,7 +59,12 @@ class PostListItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Description ---------------------------------------------------
+                      // User information --------------------------------------
+                      PostListUserInfo(
+                        viewModel: viewModel,
+                        userId: post.userId,
+                      ),
+                      // Description -------------------------------------------
                       Container(
                         margin: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -109,8 +115,6 @@ class PostListItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  //assets/images/like.png
-                  //    - assets/images/like_outline.png
                 ],
               ),
             ],

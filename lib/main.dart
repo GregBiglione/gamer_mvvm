@@ -1,7 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
-import 'package:gamer_mvvm/src/domain/use_case/post/create_post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/post/post_usecase.dart';
 import 'package:gamer_mvvm/src/domain/use_case/user/user_usecase.dart';
 import 'package:gamer_mvvm/src/injection.dart';
@@ -12,14 +9,12 @@ import 'package:gamer_mvvm/src/presentation/screen/post/create/create_post_viewm
 import 'package:gamer_mvvm/src/presentation/screen/post/detail/post_detail_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/detail/post_detail_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/list/post_list_viewmodel.dart';
-import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/my_list/my_post_list_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/update/update_post_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/post/update/update_post_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/info/profile_viewmodel.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/profile/update/update_profile_viewmodel.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_screen.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_viewmodel.dart';
@@ -61,7 +56,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => PostListViewModel(
           locator<PostUseCase>(),
           locator<AuthUseCase>(),
-        ),
+          locator<UserUseCase>(),),
         ),
         ChangeNotifierProvider(create: (context) => PostDetailViewModel(
           locator<PostUseCase>(),
