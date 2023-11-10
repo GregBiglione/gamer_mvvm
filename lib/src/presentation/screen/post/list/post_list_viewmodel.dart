@@ -24,11 +24,9 @@ class PostListViewModel extends ChangeNotifier {
 
   like(String postId) async {
     await _postUseCase.likePostUseCase.launch(postId, id);
-    notifyListeners();
   }
 
   unlike(String postId) async {
     await _postUseCase.unlikePostUseCase.launch(postId, id);
-    notifyListeners();
   }
 }

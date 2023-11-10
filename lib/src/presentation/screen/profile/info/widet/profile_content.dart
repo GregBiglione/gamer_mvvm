@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:gamer_mvvm/main.dart';
 import 'package:gamer_mvvm/src/domain/model/user_data.dart';
+import 'package:gamer_mvvm/src/domain/use_case/auth/auth_usecase.dart';
+import 'package:gamer_mvvm/src/injection.dart';
 import 'package:gamer_mvvm/src/presentation/widget/default_button.dart';
 import '../profile_viewmodel.dart';
 
@@ -117,7 +120,13 @@ class ProfileContent extends StatelessWidget {
               text: "Cerrar sesion",
               onPressed: () async {
                 await profileViewModel.logout();
-                Navigator.pushNamedAndRemoveUntil(context, "login", (route) => false);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyApp(locator<AuthUseCase>()),
+                  ),
+                  (route) => false,
+                );
               },
               iconData: Icons.power_settings_new,
               color: Colors.red,

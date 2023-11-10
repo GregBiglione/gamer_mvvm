@@ -30,16 +30,21 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  runApp(const MyApp());
+  runApp(MyApp(locator<AuthUseCase>()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthUseCase _authUseCase;
+
+  const MyApp(this._authUseCase, {super.key,});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final sessionId = _authUseCase.userSessionUseCase.userSession?.uid ?? "";
+    print(sessionId);
     return MultiProvider(
+      key: Key(sessionId),
       providers: [
         ChangeNotifierProvider(create: (context) => LoginViewModel(locator<AuthUseCase>())),
         ChangeNotifierProvider(create: (context) => RegisterViewModel(locator<AuthUseCase>())),
@@ -78,7 +83,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: "login",
+        initialRoute: sessionId.isEmpty ? "login" : "home",
         routes: {
           "login": (BuildContext context) => const LoginScreen(),
           "register": (BuildContext context) => const RegisterScreen(),

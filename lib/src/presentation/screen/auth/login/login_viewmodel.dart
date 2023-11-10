@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/domain/utils/resource.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/login/login_state.dart';
@@ -8,24 +10,19 @@ import '../../../../domain/use_case/auth/auth_usecase.dart';
 class LoginViewModel extends ChangeNotifier {
   // State ---------------------------------------------------------------------
   LoginState _loginState = LoginState();
-  late Resource _response = Init();
   // Use case ------------------------------------------------------------------
   final AuthUseCase _authUseCase;
+  final StreamController<Resource> _responseController = StreamController<Resource>();
 
-  LoginViewModel(this._authUseCase) {
-    final user = _authUseCase.userSessionUseCase.userSession;
-
-    if (user != null) {
-      _response = Success(user);
-    }
-  }
+  LoginViewModel(this._authUseCase);
 
   // Getters -------------------------------------------------------------------
   LoginState get loginState => _loginState;
-  Resource get response => _response;
+  Stream<Resource> get response => _responseController.stream;
 
   // Setters -------------------------------------------------------------------
   void changeEmail(String value) {
+    _responseController.add(Init());
     final bool emailValid =
     RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(value);
@@ -47,6 +44,7 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void changePassword(String value) {
+    _responseController.add(Init());
     if (value.length >= 6) {
       _loginState = _loginState.copyWith(password: ValidationItem(
         value: value,
@@ -66,27 +64,13 @@ class LoginViewModel extends ChangeNotifier {
   void login() async {
     if (loginState.isValid()) {
       // Loading ---------------------------------------------------------------
-      _response = Loading();
-      notifyListeners();
+      _responseController.add(Loading());
       // Login -----------------------------------------------------------------
-      _response = await _authUseCase.loginUseCase.launch(
+      final data = await _authUseCase.loginUseCase.launch(
         email: _loginState.email.value,
         password: _loginState.password.value,
       );
-      print("Data: $_response");
-      notifyListeners();
+      _responseController.add(data);
     }
-    else {
-      print("El formulario no es valido");
-    }
-  }
-
-  // ---------------------------------------------------------------------------
-  // Reset ---------------------------------------------------------------------
-  // ---------------------------------------------------------------------------
-
-  resetResponse() {
-    _response = Init();
-    notifyListeners();
   }
 }

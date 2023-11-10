@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gamer_mvvm/src/presentation/screen/auth/register/register_state.dart';
@@ -8,18 +10,21 @@ import '../../../utils/validation_item.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   RegisterState _registerState = RegisterState();
-  late Resource _response = Init();
+  //late Resource _response = Init();
   // Use case ------------------------------------------------------------------
   final AuthUseCase _authUseCase;
+  final StreamController<Resource> _responseController = StreamController<Resource>();
 
   RegisterViewModel(this._authUseCase);
 
   // Getters -------------------------------------------------------------------
   RegisterState get registerState => _registerState;
-  Resource get response => _response;
+  Stream<Resource> get response => _responseController.stream;
+  //Resource get response => _response;
 
   // Setters -------------------------------------------------------------------
   void changeUsername(String value) {
+    _responseController.add(Init());
     if(value.length >= 3) {
       _registerState = _registerState.copyWith(username: ValidationItem(
         value: value,
@@ -33,6 +38,7 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   void changeEmail(String value) {
+    _responseController.add(Init());
     final bool emailValid =
     RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(value);
@@ -54,6 +60,7 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   void changePassword(String value) {
+    _responseController.add(Init());
     if (value.length >= 6) {
       _registerState = _registerState.copyWith(password: ValidationItem(
         value: value,
@@ -67,6 +74,7 @@ class RegisterViewModel extends ChangeNotifier {
   }
 
   void changeConfirmPassword(String value) {
+    _responseController.add(Init());
     if (value.length >= 6) {
       _registerState = _registerState.copyWith(confirmPassword: ValidationItem(
         value: value,
@@ -86,20 +94,10 @@ class RegisterViewModel extends ChangeNotifier {
   void register() async {
     if (registerState.isValid()) {
       // Loading ---------------------------------------------------------------
-      _response = Loading();
-      notifyListeners();
+      _responseController.add(Loading());
       // Register --------------------------------------------------------------
-      _response = await _authUseCase.registerUseCase.launch(_registerState.toUser());
-      notifyListeners();
+      final data = await _authUseCase.registerUseCase.launch(_registerState.toUser());
+      _responseController.add(data);
     }
-  }
-
-  // ---------------------------------------------------------------------------
-  // Reset ---------------------------------------------------------------------
-  // ---------------------------------------------------------------------------
-
-  resetResponse() {
-    _response = Init();
-    notifyListeners();
   }
 }
